@@ -1,2 +1,0 @@
-# cordovaApp
-cordovaApp
