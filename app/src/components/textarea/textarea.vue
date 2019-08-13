@@ -12,7 +12,9 @@
       :border="true"
       clearable
       @blur="onBlur"
+      :required="required"
     />
+    <p class="count">{{nowLength}}/{{maxlength}}字</p>
   </div>
 </template>
 
@@ -35,12 +37,17 @@ export default {
     },
     rows: {
       type: Number,
-      default: 3
+      default: 5
+    },
+    required: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
-      value: ''
+      value: '',
+      nowLength: 0
     }
   },
   components: {
@@ -50,13 +57,26 @@ export default {
     onBlur() {
       this.$emit('confirm', this.value)
     }
-  }
+  },
+  watch: {
+    'value': function (val) {
+      const count = val.length
+      this.nowLength = count
+    }
+  },
 }
 
 </script>
 <style lang='scss' scoped>
 .textarea {
   position: relative;
+  .count {
+    position: absolute;
+    bottom: 6px;
+    right: 10px;
+    font-size: 14px;
+    color: #333;
+  }
 }
 .textarea::after {
   position: absolute;

@@ -1,5 +1,5 @@
 <template>
-  <div :style="`height: ${enter ? '150px' : '60px'}`" class="footer">
+  <div v-show="show" :style="`height: ${enter ? '150px' : '60px'}`" class="footer">
     <transition name="module-show">
       <div v-show="enter" class="module">
         <ul class="wrapper">
@@ -40,7 +40,8 @@ import { Icon, Button } from 'vant'
 export default {
   data() {
     return {
-      enter: false
+      enter: false,
+      show: false
     }
   },
   components: {
@@ -61,6 +62,15 @@ export default {
       window.addEventListener('scroll', () => {
         this.enter = false
       })
+    }
+  },
+  watch: {
+    '$route': function (to, from) {
+      if (to.name === 'home' || to.name === 'follow') {
+        this.show = true
+      } else {
+        this.show = false
+      }
     }
   },
 }

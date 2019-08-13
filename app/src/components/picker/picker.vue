@@ -20,6 +20,7 @@
         @confirm="confirm"
         @cancel="show = false"
         show-toolbar
+        @change="onChange"
       ></Picker>
       <DatetimePicker
         v-if="type === 'date'"
@@ -87,9 +88,20 @@ export default {
         this.$emit('confirm', formatDate)
         return
       }
+      if (toString.call(val) === '[object Array]') {
+        const formatVal = `${val[0]['text']}/${val[1]['text']}`
+        this.value = formatVal
+        this.show = false
+        this.$emit('confirm', formatVal)
+        return
+      }
       this.value = val.text
       this.show = false
       this.$emit('confirm', val)
+    },
+    onChange(picker, values) {
+      const val = { picker, values }
+      this.$emit('onChange', val)
     }
   }
 }

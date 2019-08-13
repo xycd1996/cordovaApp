@@ -210,7 +210,7 @@ export default {
       this.values.contract = val
     },
     getTime(val) {
-      this.values.time = val
+      this.values.time.value = val
     },
     getBusiness(val) {
       this.values.business = val

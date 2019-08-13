@@ -54,7 +54,10 @@ export default {
     },
     onRefresh() {
       setTimeout(() => {
-        Toast.success('刷新成功')
+        Toast.success({
+          message: '刷新成功',
+          duration: 1000
+        })
         this.downLoading = false
       }, 1000);
     },

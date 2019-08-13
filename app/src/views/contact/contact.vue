@@ -92,7 +92,7 @@
         :columns="sexColumns"
         @confirm="getSex"
       />
-      <Textarea @confirm="getRemark" label="备注" :rows="5" />
+      <Textarea @confirm="getRemark" :maxlength="100" label="备注" :rows="5" />
     </div>
   </div>
 </template>
@@ -176,7 +176,7 @@ export default {
       this.values.sext = val
     },
     getRemark(val) {
-      this.values.remark.text = val
+      this.values.remark.val = val
     }
   }
 }
